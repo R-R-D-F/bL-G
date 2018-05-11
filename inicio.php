@@ -109,3 +109,15 @@ $(document).ready( function () {
 </script>
 </html>
 
+/ Definimos la función
+function ss_scripts() {
+// El primer paso es usar wp_register_script para registrar el script que queremos cargar. Fíjense que aquí sí usamos *get_template_directory_uri()*
+wp_register_script( 'primer-script', get_template_directory_uri() . '/js/algunjs.js', array( 'jquery'), '1.0.0', true );
+wp_register_script( 'segundo-script', get_template_directory_uri() . '/js/otrojs.js', array( 'jquery'), '1.0.0', false );
+// Una vez que registramos el script debemos colocarlo en la cola de WordPress
+wp_enqueue_script( 'app-script' );
+wp_enqueue_script( 'segundo-script' );
+}
+
+// Agregamos la función a la lista de cargas de WordPress.
+add_action( 'wp_enqueue_scripts', 'ss_scripts' );
